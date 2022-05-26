@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.util.Assert;
 
 import com.qiaw99.AyUser.model.AyUser;
 import com.qiaw99.AyUser.service.AyUserService;
@@ -59,5 +60,8 @@ class AyUserApplicationTests {
 		PageRequest pageRequest = PageRequest.of(0, 10);
 		Page<AyUser> userList2 = ayUserService.findAll(pageRequest);
 		System.out.println("findAll(Pageable):" + userList2.getTotalPages() + "/" + userList2.getSize());
+		
+		List<AyUser> userList3 = ayUserService.findByName("a");
+		Assert.isTrue(userList3.get(0).getName().equals("a"), "[ERROR] data error");
 	}
 }
