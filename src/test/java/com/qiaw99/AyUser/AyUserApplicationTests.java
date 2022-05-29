@@ -64,4 +64,13 @@ class AyUserApplicationTests {
 		List<AyUser> userList3 = ayUserService.findByName("a");
 		Assert.isTrue(userList3.get(0).getName().equals("a"), "[ERROR] data error");
 	}
+	
+	@Test
+	public void testTransaction() {
+		AyUser ayUser = new AyUser();
+		ayUser.setId("4");
+		ayUser.setName("789");
+		ayUser.setPassword("password");
+		ayUserService.save(ayUser);
+	}
 }

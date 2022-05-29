@@ -8,12 +8,14 @@ import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qiaw99.AyUser.model.AyUser;
 import com.qiaw99.AyUser.repository.AyUserRepository;
 import com.qiaw99.AyUser.service.AyUserService;
 
 @Service
+@Transactional
 public class AyUserServuceImpl implements AyUserService {
 
 	@Resource
@@ -30,8 +32,15 @@ public class AyUserServuceImpl implements AyUserService {
 	}
 
 	@Override
+	@Transactional
 	public AyUser save(AyUser ayUser) {
-		return ayUserRepository.save(ayUser);
+		AyUser user = ayUserRepository.save(ayUser);
+		
+		// Roll back
+		String errorString = null;
+		errorString.split("/");
+		
+		return user;
 	}
 
 	@Override
